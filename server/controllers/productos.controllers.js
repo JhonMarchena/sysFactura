@@ -1,4 +1,4 @@
-import { pool } from "../config/connection";
+import { pool } from "../config/connection.js";
 
 export const getAllProductos = async (req, res) => {
   try {

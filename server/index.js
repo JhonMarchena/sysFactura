@@ -2,6 +2,7 @@ import { PORT } from "./config/port.js";
 import express from "express";
 import indexRoutes from "./routes/index.routes.js";
 import facturaRoutes from "./routes/facturas.routes.js"
+import productoRoutes from "./routes/productos.routes.js";
 import cors from "cors";
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json()); //Se utiliza par que el servidor pueda entender JSON
 
 app.use(indexRoutes); //Rutas principal
 app.use(facturaRoutes);//Rutas de facturas
+app.use(productoRoutes);//Rutas de productos
 
 app.get("/", (req, res) => {
   res.send("Hello World");
