@@ -31,7 +31,6 @@ descripcion VARCHAR(100),
 CONSTRAINT FK_Sucursal FOREIGN KEY (sucursalID) REFERENCES Sucursales(sucursalID)
 );
 
-
 CREATE TABLE Factura(
 facturaID INT AUTO_INCREMENT PRIMARY KEY,
 productoID INT,
