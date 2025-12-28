@@ -19,7 +19,8 @@ nombre VARCHAR(100),
 direccion VARCHAR(200),
 provincia VARCHAR(80),
 ciudad VARCHAR(100),
-pais VARCHAR(70)
+pais VARCHAR(70), 
+telefono VARCHAR(80),
 );
 
 CREATE TABLE Productos(

@@ -25,12 +25,12 @@ export const getProducto = async (req, res) => {
 };
 
 export const postProducto = async (req, res) => {
-  const { nombre, precio, descripcion, sucursalID } = req.body;
+  const { nombre, precio, descripcion, sucursalName } = req.body;
 
   try {
     const [result] = await pool.query(
-      "INSERT INTO PRODUCTOS(nombre, precio, descripcion, sucursalID) VALUES (?, ?, ?, ?)",
-      [nombre, precio, descripcion, sucursalID]
+      "INSERT INTO PRODUCTOS(nombre, precio, descripcion, sucursalName) VALUES (?, ?, ?, ?)",
+      [nombre, precio, descripcion, sucursalName]
     );
 
     res.status(201).json({
@@ -38,7 +38,7 @@ export const postProducto = async (req, res) => {
       nombre,
       precio,
       descripcion,
-      sucursalID,
+      sucursalName,
     });
   } catch (err) {
     console.error("Error al insertar producto", err);
