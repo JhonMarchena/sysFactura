@@ -12,13 +12,16 @@ export const getAllUsuarios = async (req, res) => {
 
 export const getUsuario = async (req, res) => {
   try {
-    const [result] = await pool.query("SELECT * FROM Usuarios WHERE id = ?", [
-      req.params.id,
-    ]);
+    const [result] = await pool.query(
+      "SELECT * FROM Usuarios WHERE userID = ?",
+      [req.params.id]
+    );
 
     if (result.length === 0) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
+
+    res.status(200).json(result[0]);
   } catch (err) {
     console.error("Error al obtener usuario", err);
     res.status(500).json({ error: "Error al obtener usuario" });
@@ -61,7 +64,7 @@ export const postUsuario = async (req, res) => {
 
 export const putUsuario = async (req, res) => {
   try {
-    const [rows] = await pool.query("UPDATE Usuarios SET ? WHERE id = ?", [
+    const [rows] = await pool.query("UPDATE Usuarios SET ? WHERE userID = ?", [
       req.body,
       req.params.id,
     ]);
@@ -77,7 +80,7 @@ export const putUsuario = async (req, res) => {
 
 export const deleteUsuario = async (req, res) => {
   try {
-    const [rows] = await pool.query("DELETE FROM Usuarios WHERE id = ?", [
+    const [rows] = await pool.query("DELETE FROM Usuarios WHERE userID = ?", [
       req.params.id,
     ]);
 
