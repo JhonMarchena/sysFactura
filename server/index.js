@@ -4,6 +4,7 @@ import indexRoutes from "./routes/index.routes.js";
 import facturaRoutes from "./routes/facturas.routes.js"
 import productoRoutes from "./routes/productos.routes.js";
 import sucursalRoutes from "./routes/sucursales.routes.js";
+import usuariosRoutes from "./routes/usuarios.routes.js";
 import cors from "cors";
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(indexRoutes); //Rutas principal
 app.use(facturaRoutes);//Rutas de facturas
 app.use(productoRoutes);//Rutas de productos
 app.use(sucursalRoutes);//Rutas de sucursales
+app.use(usuariosRoutes);//Rutas de usuarios
 
 app.get("/", (req, res) => {
   res.send("Hello World");
