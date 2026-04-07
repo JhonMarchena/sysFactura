@@ -24,4 +24,22 @@ body {
   min-height: 100vh;
 }
 
+/* INPUT BUTTON COMPONENT STYLES */
+.custom-button {
+  background-color: var(--subprimary-color);
+  color: #fff;
+  border: none;
+  height: 40px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+}
+
+.custom-button:hover {
+  background-color: var(--primary-color);
+}
+
+.custom-button:active {
+  transform: scale(1.1);
+}
 
