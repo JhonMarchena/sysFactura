@@ -7,7 +7,7 @@ function App() {
       <Link to="/factura">Factura</Link>
       <Link to="/productos">Productos</Link>
       <Link to="/sucursales">Clientes</Link>
-      <Link to="/users">Usuarios</Link>
+      <Link to="/usuarios">Usuarios</Link>
       <Link to="/login">Login</Link>
     </div>
   )

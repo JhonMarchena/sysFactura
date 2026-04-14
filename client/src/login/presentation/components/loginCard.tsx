@@ -1,6 +1,6 @@
 import { FaUser } from "react-icons/fa";
 import { UserOutlined } from "@ant-design/icons";
-import { InputPassword, InputButton, InputIcon } from "../../../components/inputs";
+import { InputPassword, InputButton, InputText } from "../../../components/inputs";
 
 function loginCard() {
   return (
@@ -14,7 +14,7 @@ function loginCard() {
           <h1 className="text-3xl font-bold text-white">Iniciar Sesión</h1>
 
           <div className="flex flex-col gap-4 w-[80%] items-center justify-center">
-            <InputIcon placeholder="Nombre de usuario" icon={<UserOutlined />} />
+            <InputText placeholder="Nombre de usuario" icon={<UserOutlined />} />
             <InputPassword placeholder="Contraseña"/>
           </div>
 
