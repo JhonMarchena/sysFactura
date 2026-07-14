@@ -1,20 +1,27 @@
-import { Input, Button } from "antd";
+import { Input, Button, InputNumber } from "antd";
 //import type { InputProps as AntdInputProps } from "antd";
 import type { InputProps } from "antd";
 import type { ButtonProps } from "antd";
+import type { InputNumberProps as AntdInputNumberProps } from "antd";
 
 // interface Props extends AntdInputProps {
 //   icon?: React.ReactNode;
 //   placeholder?: string;
 // }
 
-// 🔹 INPUT TEXT
+// INPUT TEXT
 interface InputTextProps extends InputProps {
   icon?: React.ReactNode;
 }
-// 🔹 BUTTON
+// BUTTON
 interface InputButtonProps extends ButtonProps {
   placeholder?: string;
+}
+
+// INPUT NUMBER
+interface InputNumberProps extends AntdInputNumberProps {
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 export function InputButton({ placeholder, ...props }: InputButtonProps) {
@@ -27,10 +34,18 @@ export function InputButton({ placeholder, ...props }: InputButtonProps) {
   );
 }
 
-export function InputText({ ...props }: InputTextProps) {
+export function InputNumberComponent({ placeholder }: InputNumberProps) {
+  return (
+    <div className="w-[80%] ">
+      <InputNumber placeholder={placeholder} />
+    </div>
+  )
+}
+
+export function InputText({ icon, ...props }: InputTextProps) {
   return (
     <div className="w-[80%]">
-      <Input {...props} placeholder={props.placeholder} prefix={props.icon} />
+      <Input placeholder={props.placeholder} prefix={icon} />
     </div>
   );
 }
@@ -38,7 +53,7 @@ export function InputText({ ...props }: InputTextProps) {
 export function InputPassword({ ...props }: InputTextProps) {
   return (
     <div className="w-[80%]">
-      <Input.Password {...props} placeholder={props.placeholder} />
+      <Input.Password placeholder={props.placeholder} />
     </div>
   );
 }
