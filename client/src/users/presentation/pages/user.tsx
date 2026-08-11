@@ -44,20 +44,21 @@ function User() {
     }
 
     return (
-        <form className="flex space-x-4 p-10" onSubmit={handleSubmit}>
+        <form className="w-screen h-screen flex flex-col space-y-6 p-10" onSubmit={handleSubmit}>
+            <div className="w-full flex space-x-4 items-center justify-center">
+                <ModalComponent title="Crear usuario" />
+                <InputText placeholder="Nombre" value={nombre} onChange={(e) => setName(e.target.value)} />
+                <InputText placeholder="Apellido" value={apellido} onChange={(e) => setLastName(e.target.value)} />
+                <InputText placeholder="Email" value={correo} onChange={(e) => setEmail(e.target.value)} />
+                <InputPassword placeholder="Clave" value={clave} onChange={(e) => setPassword(e.target.value)} />
+                <InputNumberComponent placeholder="Edad" value={edad} />
+                <InputText placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
+                <InputText placeholder="Provincia" value={provincia} onChange={(e) => setProvincia(e.target.value)} />
+                <InputText placeholder="Ciudad" value={ciudad} onChange={(e) => setCiudad(e.target.value)} />
+                <InputButton placeholder="Guardar" />
+            </div>
 
-            <ModalComponent title="Crear usuario" />
-            <InputText placeholder="Nombre" value={nombre} onChange={(e) => setName(e.target.value)} />
-            <InputText placeholder="Apellido" value={apellido} onChange={(e) => setLastName(e.target.value)} />
-            <InputText placeholder="Email" value={correo} onChange={(e) => setEmail(e.target.value)} />
-            <InputPassword placeholder="Clave" value={clave} onChange={(e) => setPassword(e.target.value)} />
-            <InputNumberComponent placeholder="Edad" value={edad} />
-            <InputText placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
-            <InputText placeholder="Provincia" value={provincia} onChange={(e) => setProvincia(e.target.value)} />
-            <InputText placeholder="Ciudad" value={ciudad} onChange={(e) => setCiudad(e.target.value)} />
-            <InputButton placeholder="Guardar" />
-
-            <TablaUsuarios></TablaUsuarios>
+            <div className="w-full"><TablaUsuarios></TablaUsuarios></div>
         </form>
     )
 }

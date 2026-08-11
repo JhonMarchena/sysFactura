@@ -44,6 +44,7 @@ export function TablaUsuarios() {
 
   return (
     <Table
+    className="w-full h-full"
       columns={columns}
       dataSource={data}
       loading={loading}
