@@ -1,66 +1,56 @@
-import { useState } from 'react';
-import { InputText, InputButton, InputPassword, InputNumberComponent } from '../../../components/inputs';
+import { InputText, InputPassword, InputNumberComponent } from '../../../components/inputs';
 import ModalComponent from '../../../components/modal';
-import { createUser } from '../../../services/userService.ts';
 import { TablaUsuarios } from '../../../components/table.tsx';
+import React from 'react';
 
 function User() {
-    const [nombre, setName] = useState('')
-    const [apellido, setLastName] = useState('')
-    const [correo, setEmail] = useState('')
-    const [clave, setPassword] = useState('')
-    const [edad, setEdad] = useState(0) // colocar un input diferente para numeros
-    const [direccion, setDireccion] = useState('')
-    const [provincia, setProvincia] = useState('')
-    const [ciudad, setCiudad] = useState('')
-    console.log(nombre)
+  const [form, setForm] = React.useState({
+    nombre: '',
+    apellido: '',
+    correo: '',
+    clave: '',
+    direccion: '',
+    edad: 0,
+    provincia: '',
+    ciudad: ''
+  });
 
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        //Aqui va el HTTP request para guardar el usuario (axios)
-        try {
-            const res = await createUser({
-                nombre,
-                apellido,
-                correo,
-                clave,
-                edad,
-                direccion,
-                provincia,
-                ciudad
-            });
+  const handleChange = (field: string, value: string | number) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+  };
 
-            console.log(res.data);
+  const handleSubmit = () => {
+    // Handle form submission
+  };
 
-            if (res.status === 204) {
-                alert('Usuario creado exitosamente');
-            }
+  return (
+    <div className="w-screen h-screen flex flex-col space-y-6 p-10">
+      <div className="w-full flex space-x-4 items-center">
+        <ModalComponent title="Crear usuario" onSubmit={handleSubmit}>
+          <InputText placeholder="Nombre" value={form.nombre}
+            onChange={(e) => handleChange('nombre', e.target.value)} />
+          <InputText placeholder="Apellido" value={form.apellido}
+            onChange={(e) => handleChange('apellido', e.target.value)} />
+          <InputText placeholder="Email" value={form.correo}
+            onChange={(e) => handleChange('correo', e.target.value)} />
+          <InputPassword placeholder="Clave" value={form.clave}
+            onChange={(e) => handleChange('clave', e.target.value)} />
+          <InputText placeholder="Dirección" className="col-span-2" value={form.direccion}
+            onChange={(e) => handleChange('direccion', e.target.value)} />
+          <InputNumberComponent placeholder="Edad" value={form.edad}
+            onChange={(value) => handleChange('edad', value ?? 0)} />
+          <InputText placeholder="Provincia" value={form.provincia}
+            onChange={(e) => handleChange('provincia', e.target.value)} />
+          <InputText placeholder="Ciudad" value={form.ciudad}
+            onChange={(e) => handleChange('ciudad', e.target.value)} />
+        </ModalComponent>
+      </div>
 
-        } catch (error) {
-            console.error(error);
-        }
-
-        console.log('submit')
-    }
-
-    return (
-        <form className="w-screen h-screen flex flex-col space-y-6 p-10" onSubmit={handleSubmit}>
-            <div className="w-full flex space-x-4 items-center justify-center">
-                <ModalComponent title="Crear usuario" />
-                <InputText placeholder="Nombre" value={nombre} onChange={(e) => setName(e.target.value)} />
-                <InputText placeholder="Apellido" value={apellido} onChange={(e) => setLastName(e.target.value)} />
-                <InputText placeholder="Email" value={correo} onChange={(e) => setEmail(e.target.value)} />
-                <InputPassword placeholder="Clave" value={clave} onChange={(e) => setPassword(e.target.value)} />
-                <InputNumberComponent placeholder="Edad" value={edad} />
-                <InputText placeholder="Dirección" value={direccion} onChange={(e) => setDireccion(e.target.value)} />
-                <InputText placeholder="Provincia" value={provincia} onChange={(e) => setProvincia(e.target.value)} />
-                <InputText placeholder="Ciudad" value={ciudad} onChange={(e) => setCiudad(e.target.value)} />
-                <InputButton placeholder="Guardar" />
-            </div>
-
-            <div className="w-full"><TablaUsuarios></TablaUsuarios></div>
-        </form>
-    )
+      <div className="w-full">
+        <TablaUsuarios />
+      </div>
+    </div>
+  );
 }
 
-export default User
+export default User;

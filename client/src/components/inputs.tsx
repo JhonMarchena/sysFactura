@@ -26,34 +26,31 @@ interface InputNumberProps extends AntdInputNumberProps {
 
 export function InputButton({ placeholder, ...props }: InputButtonProps) {
   return (
-    <div className="w-[80%] ">
-      <Button className="custom-button" htmlType="submit" onClick={props.onClick}>
-        {placeholder}
-      </Button>
-    </div>
+    <Button className="custom-button" htmlType="submit" onClick={props.onClick}>
+      {placeholder}
+    </Button>
   );
 }
 
 export function InputNumberComponent({ placeholder }: InputNumberProps) {
   return (
-    <div className="w-[80%] ">
-      <InputNumber placeholder={placeholder} />
-    </div>
+    <InputNumber placeholder={placeholder} />
   )
 }
 
-export function InputText({ icon, ...props }: InputTextProps) {
+export function InputText({ icon, className, ...props }: InputTextProps) {
   return (
-    <div className="w-[80%]">
-      <Input placeholder={props.placeholder} prefix={icon} />
+    <div className={`w-full ${className ?? ""}`}>
+      <Input
+        prefix={icon}
+        {...props}>
+      </Input>
     </div>
   );
 }
 
 export function InputPassword({ ...props }: InputTextProps) {
   return (
-    <div className="w-[80%]">
-      <Input.Password placeholder={props.placeholder} />
-    </div>
+    <Input.Password placeholder={props.placeholder} />
   );
 }

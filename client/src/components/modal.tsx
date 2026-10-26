@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Modal } from 'antd';
-import Title from 'antd/es/skeleton/Title';
 
 interface ModalComponentProps {
- title: string;
+  title: string;
+  children: React.ReactNode;
+  onSubmit: () => Promise<boolean | void> | boolean | void;
 }
 
-const ModalComponent: React.FC<ModalComponentProps> = ({ title }) => {
+const ModalComponent: React.FC<ModalComponentProps> = ({ title, children, onSubmit }) => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
@@ -14,33 +15,39 @@ const ModalComponent: React.FC<ModalComponentProps> = ({ title }) => {
     setOpen(true);
   };
 
-  const handleOk = () => {
-
+  const handleOk = async () => {
     setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
+    try {
+      const result = await onSubmit();
+      if (result !== false) setOpen(false);
+    } catch (error) {
+      console.error('Error al guardar:', error);
+    } finally {
       setConfirmLoading(false);
-    }, 2000);
+    }
   };
 
   const handleCancel = () => {
-    console.log('Clicked cancel button');
     setOpen(false);
   };
 
   return (
     <>
       <Button type="primary" onClick={showModal}>
-       {title}
+        {title}
       </Button>
       <Modal
         title={title}
         open={open}
         onOk={handleOk}
+        okText="Guardar"
+        cancelText="Cancelar"
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
       >
-        <p>Some contents...</p>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4 p-2">
+          {children}
+        </div>
       </Modal>
     </>
   );
